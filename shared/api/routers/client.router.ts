@@ -82,4 +82,30 @@ export const clientRouter = createTRPCRouter({
         },
       });
     }),
+  update: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        name: z.string(),
+        description: z.string(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      return prisma.client.update({
+        where: {
+          id: input.id,
+          userId: ctx.auth.user.id,
+        },
+        data: {
+          name: input.name,
+          description: input.description,
+        },
+        select: {
+          id: true,
+          name: true,
+          description: true,
+          updatedAt: true,
+        },
+      });
+    }),
 });
