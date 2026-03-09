@@ -36,7 +36,6 @@ export function EntityItem({
   settings,
 }: EntityItemProps) {
   function handleSettingClick(event: React.MouseEvent, fn: () => void) {
-    event.preventDefault();
     event.stopPropagation();
 
     if (isPending) {
